@@ -140,6 +140,7 @@ function printDashList (o){
 							</div>`;
 		
 			for (let i = 0 ; i < dashlist.length ; i++){
+				console.log('dashlist[i].SUM======>'+dashlist[i].SUM);
 				if (dashlist[i].SUM===0) divinner += `<div class='divinner' title='${dashlist[i].DNO}'>
 														<span title='${dashlist[i].DNO}'>${dashlist[i].DNO}</span> 
 														<span 'title='${dashlist[i].DNO}' class='hiddenspan sum'>${dashlist[i].SUM}</span>
