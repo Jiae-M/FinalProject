@@ -14,7 +14,7 @@ import com.test.dashboard.model.dto.MsgDto;
 public interface MsgDao {
 
 	//쪽지함 대쉬리스트 출력 (안읽은 쪽지 갯수 세기)
-	@Select ("SELECT dno, sum(msgopened) SUM from (select dno, msgopened from msgtable where msgto=#{mid} ) group by dno")
+	@Select ("SELECT m.dno, sum(msgopened) SUM, d.dtitle from (select dno, msgopened from msgtable where msgto=#{mid}) m inner join dashboard d on(m.dno = d.dno) group by m.dno, d.dtitle")
 	public List<Map<Object, Object>> selectAll(String mid);
 	
 	// 대쉬보드별 쪽지 출력 
@@ -35,6 +35,4 @@ public interface MsgDao {
 	@Insert("INSERT INTO MSGTABLE VALUES(MSGNOSEQ.NEXTVAL, #{msgfrom}, #{msgto}, #{msgdate}, 1, #{dno}, #{msgcontent}, #{msgtitle})")
 	public int sendMsg(Map<Object, Object> params);
 	
-	@Select("SELECT MID FROM DASHMEMBER WHERE DNO=${dno}")
-	public List<String> getDashMember(String dno);
 }
